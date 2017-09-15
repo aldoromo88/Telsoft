@@ -13,7 +13,7 @@ namespace Telsoft.Core.Applications.Common
             //TODO Get this path from configs
             var node = new Uri("http://localhost:9200");
             var settings = new ConnectionSettings(node);
-            settings.DefaultIndex(index);
+            settings.DefaultIndex(index.ToLowerInvariant());
             settings.DisableDirectStreaming(true);
 
             _storage = new ElasticClient(settings);
@@ -30,22 +30,22 @@ namespace Telsoft.Core.Applications.Common
 
         public virtual IIndexResponse Create(T dto)
         {
-            return Storage.Index(dto);
+            var result = Storage.Index(dto);
+
+            return result;
         }
 
-        public virtual IDeleteResponse DelateCompany(Guid id)
+        public virtual IDeleteResponse Delate(Guid id)
         {
             return Storage.Delete(new DocumentPath<T>(id));
         }
 
-        public virtual T GetComnpany(Guid id)
+        public virtual T Get(Guid id)
         {
             return Storage.Get(new DocumentPath<T>(id)).Source;
         }
-
-        public abstract ISearchResponse<T> SearchCompanies(dynamic searchRequest);
-
-        public virtual IUpdateResponse<T> UpdateCompany<TUpdate>(Guid id, TUpdate dto) where TUpdate : class
+        
+        public virtual IUpdateResponse<T> Update<TUpdate>(Guid id, TUpdate dto) where TUpdate : class
         {
             return Storage.Update<T, TUpdate>(
                 new DocumentPath<T>(id),

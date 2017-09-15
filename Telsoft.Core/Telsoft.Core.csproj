@@ -8,4 +8,8 @@
     <PackageReference Include="NEST" Version="5.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Applications\Common\Dtos\" />
+  </ItemGroup>
+
 </Project>

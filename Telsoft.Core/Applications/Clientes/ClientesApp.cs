@@ -12,9 +12,9 @@ namespace Telsoft.Core.Applications.Clientes
         {
         }
 
-        public override ISearchResponse<Cliente> SearchCompanies(dynamic searchRequest)
+        public ISearchResponse<Cliente> Search(ClientSeachDto searchParams)
         {
-            return Storage.Search<Cliente>(c => c.From(0).Size(10).Query(q =>q.Term(t => t.Nombre, (string)searchRequest.Filtro)));
+            return Storage.Search<Cliente>(c => c.From((searchParams.Page - 1) * searchParams.Size).Size(searchParams.Size).Query(q => q.Term(t => t.Nombre, searchParams.Filter)));
         }
     }
 }

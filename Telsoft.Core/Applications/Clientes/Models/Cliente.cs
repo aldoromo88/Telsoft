@@ -1,8 +1,10 @@
-﻿namespace Telsoft.Core.Applications.Clientes.Models
+﻿using System;
+
+namespace Telsoft.Core.Applications.Clientes.Models
 {
     public class Cliente
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Nombre { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
