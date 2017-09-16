@@ -9,12 +9,12 @@ using System;
 namespace Telsoft.Web.Controllers
 {
   [Produces("application/json")]
-  [Route("api/clientes")]
-  public class ClientesController : Controller
+  [Route("api/clients")]
+  public class ClientsController : Controller
   {
     IClientesApp _app;
 
-    public ClientesController()
+    public ClientsController()
     {
       _app = new ClientesApp();
     }

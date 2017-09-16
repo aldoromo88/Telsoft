@@ -1,17 +1,20 @@
+import axios from 'axios';
 import store from '@/store';
-// import axios from 'axios';
 
 
-// const Mutations = {
-//   ClientAdded: 'ClientAdded',
-//   ClientEdited: 'ClientEdited',
-//   ClientsFeeded: 'FeedClients',
-//   ClientLoaded: 'ClientLoaded',
-//
-// };
+const Mutations = {
+  ClientAdded: 'ClientAdded',
+  ClientEdited: 'ClientEdited',
+  ClientsFeeded: 'FeedClients',
+  ClientLoaded: 'ClientLoaded',
+};
+
+const ActionsNames = {
+  Search: 'Clients-Search',
+};
 
 const state = {
-  Clients: [],
+  Clients: null,
   CurrentClient: null,
   ClientAddedResult: null,
 };
@@ -23,6 +26,12 @@ const getters = {
 };
 
 const actions = {
+  [ActionsNames.Search]({ commit }, searchParams) {
+    axios.post('api/clients/search', searchParams)
+      .then((res) => {
+        commit(Mutations.ClientsFeeded, res.data);
+      });
+  },
   // Add({ commit }, client) {
   //   // axios.get('/api/hello')
   //   //   .then((res) => {
@@ -41,6 +50,9 @@ const actions = {
 };
 
 const mutations = {
+  [Mutations.ClientsFeeded](s, payload) {
+    s.Clients = payload;
+  },
   // [NOTIFICATION_ADDED](state, notification) {
   //   state.Notifications.push(notification);
   // },
@@ -56,9 +68,12 @@ const mutations = {
   // },
 };
 
-store.registerModule('arcLogger', {
+store.registerModule('clients', {
   state,
   getters,
   actions,
   mutations,
 });
+
+
+export default ActionsNames;

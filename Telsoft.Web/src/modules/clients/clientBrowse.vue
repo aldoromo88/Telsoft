@@ -1,23 +1,23 @@
 <template>
-  <div>
-    Clientes
-  </div>
+<div>
+  {{msg}}
+</div>
 </template>
 <script>
+import ActionsNames from './dataClients';
+
 export default {
   name: 'client-browse',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'Clientes',
     };
   },
-  created() {
-    this.$http
-      .get('/api/hello')
-      .then((res) => {
-        this.msg = res.data.message;
-      });
-      // .catch(ex => console.log(ex));
+  mounted() {
+    this.$store.dispatch(ActionsNames.Seach, {
+      Page: 1,
+      Size: 10,
+    });
   },
 };
 </script>
