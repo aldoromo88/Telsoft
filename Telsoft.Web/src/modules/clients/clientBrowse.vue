@@ -4,7 +4,9 @@
 </div>
 </template>
 <script>
-import ActionsNames from './dataClients';
+import {
+  ActionsNames,
+} from './dataClients';
 
 export default {
   name: 'client-browse',
@@ -14,9 +16,9 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch(ActionsNames.Seach, {
+    this.$store.dispatch(ActionsNames.Search, {
       Page: 1,
-      Size: 10,
+      Size: 15,
     });
   },
 };

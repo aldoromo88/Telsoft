@@ -1,10 +1,11 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Telsoft.Core.Applications.Clientes.Models;
 using Telsoft.Core.Applications.Clientes.Contracts;
 using Telsoft.Core.Applications.Clientes;
 using Nest;
 using System;
+using System.Collections.Generic;
+using Telsoft.Core.Applications.Common.Dtos;
 
 namespace Telsoft.Web.Controllers
 {
@@ -24,37 +25,40 @@ namespace Telsoft.Web.Controllers
     [Route("create")]
     public IIndexResponse Create([FromBody]Cliente dto)
     {
-      return _app.Create(dto);
+      var result = _app.Create(dto);
+      return result;
     }
 
     [HttpPost]
     [Route("delete")]
-    public IDeleteResponse Delate(Guid id)
+    public IDeleteResponse Delate([FromBody]Guid id)
     {
-      return _app.Delate(id);
+      var result = _app.Delate(id);
+      return result;
     }
 
     [HttpPost]
     [Route("get")]
-    public Cliente Get(Guid id)
+    public Cliente Get([FromBody]Guid id)
     {
-      return _app.Get(id);
+      var result = _app.Get(id);
+      return result;
     }
 
     [HttpPost]
     [Route("search")]
-    public IReadOnlyCollection<Cliente> Search([FromBody]ClientSeachDto searchParams)
+    public SearchResult<Cliente> Search([FromBody]ClientSeachDto searchParams)
     {
-
-      ISearchResponse<Cliente> result = _app.Search(searchParams);
-      return result.Documents;
+      var result = _app.Search(searchParams);
+      return result;
     }
 
     [HttpPost]
     [Route("update")]
     public IUpdateResponse<Cliente> Update([FromBody]Cliente dto)
     {
-      return _app.Update(dto.Id, dto);
+      var result = _app.Update(dto.Id, dto);
+      return result;
     }
   }
 }

@@ -2,25 +2,25 @@ import axios from 'axios';
 import store from '@/store';
 
 
-const Mutations = {
+export const Mutations = {
   ClientAdded: 'ClientAdded',
   ClientEdited: 'ClientEdited',
   ClientsFeeded: 'FeedClients',
   ClientLoaded: 'ClientLoaded',
 };
 
-const ActionsNames = {
+export const ActionsNames = {
   Search: 'Clients-Search',
 };
 
 const state = {
-  Clients: null,
+  SearchResult: null,
   CurrentClient: null,
   ClientAddedResult: null,
 };
 
-const getters = {
-  Clients: s => s.Clients,
+export const getters = {
+  SearchResult: s => s.SearchResult,
   CurrentClient: s => s.CurrentClient,
   ClientAddedResult: s => s.ClientAddedResult,
 };
@@ -29,7 +29,7 @@ const actions = {
   [ActionsNames.Search]({ commit }, searchParams) {
     axios.post('api/clients/search', searchParams)
       .then((res) => {
-        commit(Mutations.ClientsFeeded, res.data);
+        commit(Mutations.ClientsFeeded, res);
       });
   },
   // Add({ commit }, client) {
@@ -51,7 +51,7 @@ const actions = {
 
 const mutations = {
   [Mutations.ClientsFeeded](s, payload) {
-    s.Clients = payload;
+    s.SearchResult = payload;
   },
   // [NOTIFICATION_ADDED](state, notification) {
   //   state.Notifications.push(notification);
@@ -75,5 +75,4 @@ store.registerModule('clients', {
   mutations,
 });
 
-
-export default ActionsNames;
+export default store;
