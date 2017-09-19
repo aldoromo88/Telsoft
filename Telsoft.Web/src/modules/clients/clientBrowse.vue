@@ -1,11 +1,21 @@
 <template>
 <div>
   {{msg}}
+  <div v-if="SearchResult">
+    Total results: {{SearchResult.total}} in {{SearchResult.took}} miliseconds.
+    <div>
+    </div>
+  </div>
+  <pre>{{SearchResult}}</pre>
 </div>
 </template>
 <script>
 import {
+  mapGetters,
+} from 'vuex';
+import {
   ActionsNames,
+  Getters,
 } from './dataClients';
 
 export default {
@@ -14,6 +24,9 @@ export default {
     return {
       msg: 'Clientes',
     };
+  },
+  computed: {
+    ...mapGetters(Getters),
   },
   mounted() {
     this.$store.dispatch(ActionsNames.Search, {

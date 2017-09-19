@@ -5,7 +5,7 @@ namespace Telsoft.Core.Applications.Common.Dtos
 {
     public class SearchResult<T> where T : class
     {
-        private ISearchResponse<T> _response;
+        private readonly ISearchResponse<T> _response;
 
         public long Total => _response.Total;
         public long Took => _response.Took;

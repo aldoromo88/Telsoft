@@ -19,11 +19,13 @@ const state = {
   ClientAddedResult: null,
 };
 
-export const getters = {
+const getters = {
   SearchResult: s => s.SearchResult,
   CurrentClient: s => s.CurrentClient,
   ClientAddedResult: s => s.ClientAddedResult,
 };
+
+export const Getters = Object.keys(getters);
 
 const actions = {
   [ActionsNames.Search]({ commit }, searchParams) {

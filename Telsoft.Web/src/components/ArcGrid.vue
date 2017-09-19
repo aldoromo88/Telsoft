@@ -9,10 +9,30 @@
 </template>
 
 <script>
-import routes from '@/router/routes';
-
 export default {
-  name: 'NavMenu',
+  name: 'ArcGrid',
+  props: {
+    page: {
+      type: Number,
+      default: 1,
+    },
+    size: {
+      type: Number,
+      default: 20,
+    },
+    filter: {
+      type: Object,
+      default: {},
+    },
+    columnConfig: {
+      type: Object,
+      default: {},
+    },
+    searchAction: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       routes: routes.filter(f => (f.meta ? f.meta.ShowInMenu : false))
@@ -22,6 +42,18 @@ export default {
           Display: r.meta.Display,
         })),
     };
+  },
+  methods: {
+    search() {
+      this.$store.dispatch(this.searchAction, {
+        Page: this.page,
+        Size: this.size,
+        ...this.filter,
+      });
+    },
+  },
+  mounted() {
+    this.search();
   },
 };
 </script>
