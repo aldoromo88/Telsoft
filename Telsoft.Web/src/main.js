@@ -1,12 +1,15 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
-import ArcLogger from './plugins/arcLogger';
+import App from '@/App';
+import router from '@/router';
+import store from '@/store';
+import ArcLogger from '@/plugins/arcLogger';
+import ArcGrid from '@/components/arcGrid/ArcGrid';
 
 Vue.use(ArcLogger);
+Vue.component('arc-grid', ArcGrid);
+
 
 Vue.config.productionTip = false;
 

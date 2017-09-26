@@ -30,8 +30,7 @@ import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 import 'font-awesome/scss/font-awesome.scss';
 // import 'vue-flatpickr/theme/flatpickr.min.css'
 // import SessionState from './components/SessionState';
-import NavMenu from './components/NavMenu';
-
+import NavMenu from '@/components/NavMenu';
 
 export default {
   name: 'app',

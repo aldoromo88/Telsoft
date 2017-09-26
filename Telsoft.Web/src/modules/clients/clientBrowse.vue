@@ -1,18 +1,11 @@
 <template>
 <div>
   {{msg}}
-  <div v-if="SearchResult">
-    Total results: {{SearchResult.total}} in {{SearchResult.took}} miliseconds.
-    <div>
-    </div>
-  </div>
-  <pre>{{SearchResult}}</pre>
+  <arc-grid :searchAction="search" :getterName="searchResult" :columnConfig="columnConfig">
+  </arc-grid>
 </div>
 </template>
 <script>
-import {
-  mapGetters,
-} from 'vuex';
 import {
   ActionsNames,
   Getters,
@@ -22,17 +15,16 @@ export default {
   name: 'client-browse',
   data() {
     return {
+      search: ActionsNames.Search,
+      searchResult: Getters.SearchResult,
       msg: 'Clientes',
+      columnConfig: {
+        Nombre: 'Nombre',
+        Telefono: {
+          Header: 'Tel',
+        },
+      },
     };
-  },
-  computed: {
-    ...mapGetters(Getters),
-  },
-  mounted() {
-    this.$store.dispatch(ActionsNames.Search, {
-      Page: 1,
-      Size: 15,
-    });
   },
 };
 </script>

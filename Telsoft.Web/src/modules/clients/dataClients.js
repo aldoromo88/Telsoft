@@ -11,6 +11,13 @@ export const Mutations = {
 
 export const ActionsNames = {
   Search: 'Clients-Search',
+
+};
+
+export const Getters = {
+  SearchResult: 'Client-SearchResult',
+  Current: 'Client-Current',
+  AddResult: 'Client-AddedResult',
 };
 
 const state = {
@@ -20,12 +27,10 @@ const state = {
 };
 
 const getters = {
-  SearchResult: s => s.SearchResult,
-  CurrentClient: s => s.CurrentClient,
-  ClientAddedResult: s => s.ClientAddedResult,
+  [Getters.SearchResult]: s => s.SearchResult,
+  [Getters.Current]: s => s.CurrentClient,
+  [Getters.AddResult]: s => s.ClientAddedResult,
 };
-
-export const Getters = Object.keys(getters);
 
 const actions = {
   [ActionsNames.Search]({ commit }, searchParams) {
