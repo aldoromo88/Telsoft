@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="result">
   <table class="table-responsive table-striped table-condensed">
     <thead>
       <tr>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <arc-row v-for="doc in result.Documents" :item="doc" :columns="columns"></arc-row>
+      <arc-row v-for="doc in result.documents" :item="doc" :columns="columns"></arc-row>
     </tbody>
   </table>
   <div>
@@ -34,7 +34,7 @@ export default {
     },
     filter: {
       type: Object,
-      default: {},
+      default: () => {},
     },
     columnConfig: {
       type: Object,

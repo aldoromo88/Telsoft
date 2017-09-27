@@ -19,8 +19,8 @@ export default {
       searchResult: Getters.SearchResult,
       msg: 'Clientes',
       columnConfig: {
-        Nombre: 'Nombre',
-        Telefono: {
+        nombre: 'Nombre',
+        telefono: {
           Header: 'Tel',
         },
       },
